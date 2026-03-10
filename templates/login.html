@@ -5,23 +5,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
 <div class="container">
-    <h1 class="logo"><div class="logo-container">
-    <img src="{{ url_for('static', filename='images/cow.png') }}" alt="Cow Logo" width="150">
-    <h1>LactoCart</h1>
-</div></h1>
+
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/cow.png') }}" alt="Cow Logo" width="150">
+        <h1>LactoCart</h1>
+    </div>
 
     <div class="login-box">
-        <h2>LactoCart</h2>
+        <h2>Login</h2>
 
         <form action="/login" method="POST">
+
             <input type="text" name="username" placeholder="Enter Username" required>
+
             <input type="password" name="password" placeholder="Enter Password" required>
+
             <button type="submit">Login</button>
+
         </form>
+
     </div>
+
 </div>
 
 </body>
