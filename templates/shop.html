@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>LactoCart Shop</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f3fbfb;
+margin:0;
+}
+
+.header{
+background:#2c7a7b;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.search{
+padding:10px;
+width:250px;
+border-radius:5px;
+border:none;
+}
+
+.cart{
+font-size:20px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:30px;
+padding:40px;
+}
+
+.product{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+box-shadow:0px 5px 10px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.product:hover{
+transform:scale(1.05);
+}
+
+.product img{
+width:120px;
+height:120px;
+}
+
+button{
+background:#2c7a7b;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:5px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h2>🥛 LactoCart</h2>
+
+<input class="search" placeholder="Search dairy products">
+
+<div class="cart">
+🛒 Cart
+</div>
+
+</div>
+
+<div class="products">
+
+<div class="product" onclick="window.location.href='/milk'">
+<img src="/static/images/milk.png">
+<h3>Milk</h3>
+</div>
+
+<div class="product">
+<img src="/static/images/curd.png">
+<h3>Curd</h3>
+</div>
+
+<div class="product">
+<img src="/static/images/butter.png">
+<h3>Butter</h3>
+</div>
+
+<div class="product">
+<img src="/static/images/cheese.png">
+<h3>Cheese</h3>
+</div>
+
+</div>
+
+</body>
+</html>

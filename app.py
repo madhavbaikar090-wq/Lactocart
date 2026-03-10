@@ -1,22 +1,28 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return render_template('login.html')
-
-@app.route('/login', methods=['POST'])
+@app.route("/")
 def login():
-    username = request.form.get('username')
-    return f"""
-    <div style="text-align:center; margin-top:100px; font-family:Arial;">
-        <h1 style="color:#ff9800;">Welcome {username} 🐄🥛</h1>
-        <a href="/" style="text-decoration:none; font-size:18px;">Go Back</a>
-    </div>
-    """
+    return render_template("login.html")
 
-import os
+@app.route("/login", methods=["POST"])
+def do_login():
+    username = request.form["username"]
+    password = request.form["password"]
 
+    # simple login check
+    if username and password:
+        return redirect("/shop")
+
+    return "Login Failed"
+
+
+@app.route("/shop")
+def shop():
+    return render_template("shop.html")
+@app.route("/milk")
+def milk():
+    return render_template("milk.html")
 if __name__ == "__main__":
     app.run()
