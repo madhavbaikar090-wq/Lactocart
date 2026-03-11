@@ -3,6 +3,16 @@ from flask import Flask, render_template, request, redirect
 app = Flask(__name__)
 
 cart = []
+products = {
+    "Amul Milk": 30,
+    "Mother Dairy Milk": 28,
+    "Amul Curd": 35,
+    "Mother Dairy Curd": 32,
+    "Amul Butter": 55,
+    "Heritage Butter": 50,
+    "Amul Cheese": 80,
+    "Britannia Cheese": 75
+}
 
 @app.route("/")
 def login():
@@ -36,8 +46,16 @@ def add_to_cart(item):
 
 @app.route("/cart")
 def view_cart():
-    return render_template("cart.html", cart=cart)
 
+    total = 0
+    items = []
+
+    for item in cart:
+        price = products.get(item, 0)
+        total += price
+        items.append({"name": item, "price": price})
+
+    return render_template("cart.html", items=items, total=total)
 
 @app.route("/checkout")
 def checkout():
@@ -63,7 +81,16 @@ def butter():
 
 @app.route("/receipt")
 def receipt():
-    return render_template("receipt.html", cart=cart)
+
+    total = 0
+    items = []
+
+    for item in cart:
+        price = products.get(item, 0)
+        total += price
+        items.append({"name": item, "price": price})
+
+    return render_template("receipt.html", items=items, total=total)
 
 if __name__ == "__main__":
     app.run()
