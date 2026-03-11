@@ -2,24 +2,32 @@
 <html>
 
 <head>
-<title>Receipt</title>
+
+<title>LactoCart Receipt</title>
+
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
 <div class="header">
+
 <img src="{{ url_for('static', filename='images/logo.png') }}">
 <h1>LactoCart</h1>
+
 </div>
+
 
 <div class="center-box">
 
-<div class="box">
+<div class="box" style="width:500px">
 
-<h2>Order Receipt</h2>
+<h1>Order Receipt</h1>
 
-<table border="1" style="margin:auto">
+<hr>
+
+<table border="1" style="margin:auto;font-size:18px">
 
 <tr>
 <th>Product</th>
@@ -39,11 +47,28 @@
 
 <br>
 
-<h3>Total Amount: ₹{{ total }}</h3>
+<h2>Total Amount: ₹{{ total }}</h2>
 
-<p>Payment: Cash On Delivery</p>
+<hr>
 
-<p>Your order will arrive soon 🚚</p>
+<h3>Payment Method</h3>
+
+<p>Cash On Delivery</p>
+
+<br>
+
+<h3>Important Instructions</h3>
+
+<p>
+✔ Your dairy products will arrive within 30 minutes  
+✔ Please keep cash ready for payment  
+✔ Ensure someone is available to receive the order  
+✔ For support contact LactoCart helpdesk
+</p>
+
+<br>
+
+<h2>Thank you for choosing LactoCart 🥛</h2>
 
 </div>
 

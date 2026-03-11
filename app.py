@@ -40,9 +40,10 @@ def curd():
 
 @app.route("/add_to_cart/<item>")
 def add_to_cart(item):
-    cart.append(item)
-    return redirect("/cart")
 
+    cart.append(item)
+
+    return redirect("/shop")
 
 @app.route("/cart")
 def view_cart():
