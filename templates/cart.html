@@ -1,23 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Your Cart</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
 <div class="header">
-    <img src="{{ url_for('static', filename='images/logo.png') }}">
-    <h1>LactoCart</h1>
+<img src="{{ url_for('static', filename='images/logo.png') }}">
+<h1>LactoCart</h1>
 </div>
-<div class="header">
 
+<div class="center-box">
 
-</div>
-<h1>Your Cart</h1>
+<div class="box">
 
-<ul>
+<h2>Your Cart</h2>
 
-{% for item in cart %}
+<table border="1" style="margin:auto">
 
-<li>{{ item }}</li>
+<tr>
+<th>Product</th>
+<th>Price</th>
+</tr>
+
+{% for item in items %}
+
+<tr>
+<td>{{ item.name }}</td>
+<td>₹{{ item.price }}</td>
+</tr>
 
 {% endfor %}
 
-</ul>
+</table>
 
 <br>
 
-<a href="/checkout">Proceed to Checkout</a>
+<h3>Total: ₹{{ total }}</h3>
+
+<br>
+
+<a href="/payment">
+<button>Proceed to Payment</button>
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

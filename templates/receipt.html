@@ -1,10 +1,17 @@
-<div class="header">
-    <img src="{{ url_for('static', filename='images/logo.png') }}">
-    <h1>LactoCart</h1>
-</div>
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Receipt</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 
+<body>
 
+<div class="header">
+<img src="{{ url_for('static', filename='images/logo.png') }}">
+<h1>LactoCart</h1>
+</div>
 
 <div class="center-box">
 
@@ -12,22 +19,35 @@
 
 <h2>Order Receipt</h2>
 
-<ul>
+<table border="1" style="margin:auto">
 
-{% for item in cart %}
+<tr>
+<th>Product</th>
+<th>Price</th>
+</tr>
 
-<li>{{ item }}</li>
+{% for item in items %}
+
+<tr>
+<td>{{ item.name }}</td>
+<td>₹{{ item.price }}</td>
+</tr>
 
 {% endfor %}
 
-</ul>
+</table>
 
 <br>
 
-<h3>Payment: Cash On Delivery</h3>
+<h3>Total Amount: ₹{{ total }}</h3>
+
+<p>Payment: Cash On Delivery</p>
 
 <p>Your order will arrive soon 🚚</p>
 
 </div>
 
 </div>
+
+</body>
+</html>
