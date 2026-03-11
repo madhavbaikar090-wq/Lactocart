@@ -1,31 +1,51 @@
+<!DOCTYPE html>
 <html>
+
 <head>
+
+<title>Milk Products</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
 <div class="header">
 
 <img src="{{ url_for('static', filename='images/logo.png') }}">
-
 <h1>LactoCart</h1>
 
 </div>
-    <h1>Milk Products</h1>
 
-<div>
+<h2 style="text-align:center;">Milk Products</h2>
 
-<img src="/static/images/milk1.png" width="120">
-<p>Full Cream Milk</p>
-<a href="/add_to_cart/Full Cream Milk">Add to Cart</a>
+<div class="grid">
 
-<br><br>
+<div class="product">
 
-<img src="/static/images/milk2.png" width="120">
-<p>Toned Milk</p>
-<a href="/add_to_cart/Toned Milk">Add to Cart</a>
+<img src="/static/images/amul_milk.png">
 
-<br><br>
+<p>Amul Milk</p>
 
-<img src="/static/images/milk3.png" width="120">
-<p>Organic Cow Milk</p>
-<a href="/add_to_cart/Organic Cow Milk">Add to Cart</a>
+<a href="/add_to_cart/Amul Milk">
+<button>Add to Cart</button>
+</a>
+
+</div>
+
+
+<div class="product">
+
+<img src="/static/images/mother_milk.png">
+
+<p>Mother Dairy Milk</p>
+
+<a href="/add_to_cart/Mother Dairy Milk">
+<button>Add to Cart</button>
+</a>
+
+</div>
 
 </div>
 
