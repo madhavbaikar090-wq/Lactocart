@@ -1,0 +1,15 @@
+<h1>Your Cart</h1>
+
+<ul>
+
+{% for item in cart %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+<br>
+
+<a href="/checkout">Proceed to Checkout</a>
