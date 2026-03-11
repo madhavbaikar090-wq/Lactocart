@@ -53,6 +53,13 @@ def payment():
 def order():
     return render_template("order.html")
 
+@app.route("/cheese")
+def cheese():
+    return render_template("cheese.html")
+
+@app.route("/butter")
+def butter():
+    return render_template("butter.html")
 
 if __name__ == "__main__":
     app.run()

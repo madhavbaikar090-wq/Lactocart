@@ -4,132 +4,53 @@
 
 <title>LactoCart Shop</title>
 
-<style>
-
-body{
-font-family: Arial;
-background:#f3fbfb;
-margin:0;
-}
-
-.header{
-background:#2c7a7b;
-color:white;
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.search{
-padding:10px;
-width:250px;
-border-radius:5px;
-border:none;
-}
-
-.cart{
-font-size:20px;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:30px;
-padding:40px;
-}
-
-.product{
-background:white;
-padding:20px;
-border-radius:10px;
-text-align:center;
-box-shadow:0px 5px 10px rgba(0,0,0,0.1);
-transition:0.3s;
-}
-
-.product:hover{
-transform:scale(1.05);
-}
-
-.product img{
-width:120px;
-height:120px;
-}
-
-button{
-background:#2c7a7b;
-color:white;
-border:none;
-padding:10px 15px;
-border-radius:5px;
-cursor:pointer;
-}
-
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
 <body>
-
 <div class="header">
 
-<h2>🥛 LactoCart</h2>
+<img src="{{ url_for('static', filename='images/logo.png') }}">
 
-<input type="text" id="search" placeholder="Search dairy products..." onkeyup="searchProducts()">
-
-<div class="cart">
-🛒 Cart
-</div>
+<h1>LactoCart</h1>
 
 </div>
+<div class="header">
 
-<div class="products">
+<img src="{{ url_for('static', filename='images/logo.png') }}">
+<h1>LactoCart</h1>
 
-<div class="product" onclick="window.location.href='/milk'">
+</div>
+
+
+<div class="grid">
+
+<div class="product">
 <img src="/static/images/milk.png">
 <h3>Milk</h3>
+<a href="/milk"><button>View</button></a>
 </div>
 
 <div class="product">
 <img src="/static/images/curd.png">
 <h3>Curd</h3>
-</div>
-
-<div class="product">
-<img src="/static/images/butter.png">
-<h3>Butter</h3>
+<a href="/curd"><button>View</button></a>
 </div>
 
 <div class="product">
 <img src="/static/images/cheese.png">
 <h3>Cheese</h3>
+<a href="/cheese"><button>View</button></a>
+</div>
+
+<div class="product">
+<img src="/static/images/butter.png">
+<h3>Butter</h3>
+<a href="/butter"><button>View</button></a>
 </div>
 
 </div>
 
 </body>
 </html>
-<script>
-
-function searchProducts() {
-
-let input = document.getElementById("search").value.toLowerCase();
-let products = document.getElementsByClassName("product");
-
-for (let i = 0; i < products.length; i++) {
-
-let name = products[i].innerText.toLowerCase();
-
-if (name.includes(input)) {
-products[i].style.display = "block";
-}
-else {
-products[i].style.display = "none";
-}
-
-}
-
-}
-
-</script>
