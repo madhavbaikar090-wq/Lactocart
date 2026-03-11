@@ -61,5 +61,9 @@ def cheese():
 def butter():
     return render_template("butter.html")
 
+@app.route("/receipt")
+def receipt():
+    return render_template("receipt.html", cart=cart)
+
 if __name__ == "__main__":
     app.run()

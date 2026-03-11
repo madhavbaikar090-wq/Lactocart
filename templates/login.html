@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
-<div class="header">
 
-<img src="{{ url_for('static', filename='images/logo.png') }}">
-
-<h1>LactoCart</h1>
-
-</div>
 <head>
-    <title>LactoCart Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LactoCart Login</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
-<div class="container">
+<div class="header">
 
-    <div class="logo-container">
-        <img src="{{ url_for('static', filename='images/cow.png') }}" alt="Cow Logo" width="150">
-        <h1>LactoCart</h1>
-    </div>
+<img src="{{ url_for('static', filename='images/logo.png') }}">
+<h1>LactoCart</h1>
 
-    <div class="login-box">
-        <h2>Login</h2>
+</div>
 
-        <form action="/login" method="POST">
 
-            <input type="text" name="username" placeholder="Enter Username" required>
+<div class="center-box">
 
-            <input type="password" name="password" placeholder="Enter Password" required>
+<div class="box">
 
-            <button type="submit">Login</button>
+<h2>Login</h2>
 
-        </form>
+<form action="/login" method="POST">
 
-    </div>
+<input type="text" name="username" placeholder="Username" required>
+<br><br>
+
+<input type="password" name="password" placeholder="Password" required>
+<br><br>
+
+<button type="submit">Login</button>
+
+</form>
+
+</div>
 
 </div>
 
