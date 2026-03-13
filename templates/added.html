@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Item Added</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+
+<img src="{{ url_for('static', filename='images/logo.png') }}">
+<h1>LactoCart</h1>
+
+<a href="/cart" style="margin-left:auto;">🛒 Cart</a>
+
+</div>
+
+
+<div class="center-box">
+
+<div class="box">
+
+<h2>Item Added to Cart ✅</h2>
+
+<br>
+
+<a href="/cart">
+<button>View Cart</button>
+</a>
+
+<br><br>
+
+<a href="/shop">
+<button>Continue Shopping</button>
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

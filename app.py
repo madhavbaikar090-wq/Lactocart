@@ -43,7 +43,7 @@ def add_to_cart(item):
 
     cart.append(item)
 
-    return redirect("/shop")
+    return render_template("added.html")
 
 @app.route("/cart")
 def view_cart():
