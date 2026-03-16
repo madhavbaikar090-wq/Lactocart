@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<div class="header">
+
+<div class="logo">
+<img src="/static/images/logo.png">
+<h2>LactoCart</h2>
+</div>
+
+<div class="cart">
+<a href="/cart">🛒 {{cart}}</a>
+</div>
+
+</div>
+<body>
+
+<div class="header">
+<img src="/static/images/logo.png">
+<h1>LactoCart</h1>
+</div>
+
+<h2>{{category}}</h2>
+
+{% for item in items %}
+
+<div class="product">
+
+<img src="/static/images/{{item.image}}">
+
+<h3>{{item.name}}</h3>
+
+<p>₹{{item.price}}</p>
+
+<a href="/add/{{item.id}}">Add To Cart</a>
+
+</div>
+
+{% endfor %}
+
+<br>
+
+<a href="/cart">View Cart</a>
+
+</body>
+</html>
