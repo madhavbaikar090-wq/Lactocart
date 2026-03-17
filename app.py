@@ -95,12 +95,11 @@ def view_cart():
 
 @app.route("/payment")
 def payment():
-
-    total=sum(item["price"] for item in cart)
-
-    return render_template("receipt.html",cart_items=cart,total=total,cart=len(cart))
-
-
+    try:
+        total = sum(item["price"] for item in cart)
+        return render_template("receipt.html", cart_items=cart, total=total, cart=len(cart))
+    except Exception as e:
+        return f"Error: {e}"
 @app.route("/search")
 def search():
 

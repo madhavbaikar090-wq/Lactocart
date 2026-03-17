@@ -21,7 +21,8 @@ gap:10px;
 }
 
 .logo img{
-height:50px;
+height:40px;   /* FIX: small logo */
+width:auto;
 }
 
 .cart{
