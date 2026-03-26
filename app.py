@@ -2,105 +2,129 @@ from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = "lacto_secret"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///lactocart.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///lactocart.db'
 db = SQLAlchemy(app)
+
+# ------------------ DATABASE ------------------
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
 
-with app.app_context():
-    db.create_all()
+# ------------------ PRODUCTS ------------------
 
-cart = []
-
-# PRODUCTS (ALL DAIRY)
 products = {
     "milk": [
-        {"id":1,"name":"Amul Milk","price":30,"image":"milk.png"},
-        {"id":2,"name":"Nestle Milk","price":35,"image":"milk.png"}
+        {"name": "Amul Gold", "price": 32, "img": "milk.png"},
+        {"name": "Amul Taaza", "price": 28, "img": "milk.png"},
+        {"name": "Mother Dairy", "price": 30, "img": "milk.png"},
+        {"name": "Nestle Milk", "price": 34, "img": "milk.png"}
     ],
     "curd": [
-        {"id":3,"name":"Amul Curd","price":25,"image":"curd.png"}
+        {"name": "Amul Curd", "price": 40, "img": "curd.png"},
+        {"name": "Nestle Curd", "price": 45, "img": "curd.png"},
+        {"name": "Mother Dairy Curd", "price": 42, "img": "curd.png"}
     ],
     "butter": [
-        {"id":4,"name":"Amul Butter","price":55,"image":"butter.png"}
+        {"name": "Amul Butter", "price": 55, "img": "butter.png"},
+        {"name": "Britannia Butter", "price": 60, "img": "butter.png"}
     ],
     "cheese": [
-        {"id":5,"name":"Amul Cheese","price":80,"image":"cheese.png"}
-    ],
-    "paneer": [
-        {"id":6,"name":"Fresh Paneer","price":90,"image":"cheese.png"}
-    ],
-    "ghee": [
-        {"id":7,"name":"Desi Ghee","price":120,"image":"butter.png"}
+        {"name": "Amul Cheese", "price": 65, "img": "cheese.png"},
+        {"name": "Go Cheese", "price": 70, "img": "cheese.png"}
     ]
 }
 
-@app.route("/")
+# ------------------ ROUTES ------------------
+
+@app.route('/')
 def home():
-    return redirect("/login")
+    return redirect('/login')
 
 # REGISTER
-@app.route("/register", methods=["GET","POST"])
+@app.route('/register', methods=['GET','POST'])
 def register():
-    if request.method=="POST":
-        user = User(username=request.form["username"],password=request.form["password"])
+    if request.method == 'POST':
+        user = User(username=request.form['username'],
+                    password=request.form['password'])
         db.session.add(user)
         db.session.commit()
-        return redirect("/login")
-    return render_template("register.html")
+        return redirect('/login')
+    return render_template('register.html')
 
 # LOGIN
-@app.route("/login", methods=["GET","POST"])
+@app.route('/login', methods=['GET','POST'])
 def login():
-    if request.method=="POST":
+    if request.method == 'POST':
         user = User.query.filter_by(
-            username=request.form["username"],
-            password=request.form["password"]
+            username=request.form['username'],
+            password=request.form['password']
         ).first()
 
         if user:
-            session["user"]=user.username
-            return redirect("/shop")
+            session['user'] = user.username
+            session['cart'] = []
+            return redirect('/shop')
 
-    return render_template("login.html")
+    return render_template('login.html')
 
-# SHOP PAGE (CATEGORIES)
-@app.route("/shop")
+# SHOP
+@app.route('/shop')
 def shop():
-    return render_template("shop.html", cart=len(cart))
+    return render_template('shop.html')
 
-# CATEGORY PAGE
-@app.route("/category/<name>")
-def category(name):
-    items = products.get(name, [])
-    return render_template("category.html", items=items, category=name, cart=len(cart))
+# PRODUCTS
+@app.route('/products/<category>')
+def products_page(category):
+    return render_template('products.html',
+                           items=products[category],
+                           category=category)
 
 # ADD TO CART
-@app.route("/add/<int:id>")
-def add(id):
-    for cat in products.values():
-        for item in cat:
-            if item["id"]==id:
-                cart.append(item)
-                return redirect("/cart")
-    return "Error"
+@app.route('/add/<name>/<int:price>')
+def add(name, price):
+    if 'cart' not in session:
+        session['cart'] = []
+
+    session['cart'].append({"name": name, "price": price})
+    session.modified = True
+    return redirect('/cart')
 
 # CART
-@app.route("/cart")
-def view_cart():
-    total = sum(item["price"] for item in cart)
-    return render_template("cart.html", cart_items=cart, total=total, cart=len(cart))
+@app.route('/cart')
+def cart():
+    cart = session.get('cart', [])
+    total = sum(item['price'] for item in cart)
+    return render_template('cart.html', cart=cart, total=total)
 
 # PAYMENT
-@app.route("/payment")
+@app.route('/payment')
 def payment():
-    total = sum(item["price"] for item in cart)
-    return render_template("receipt.html", cart_items=cart, total=total)
+    cart = session.get('cart', [])
+    total = sum(item['price'] for item in cart)
+    return render_template('receipt.html', cart=cart, total=total)
 
-if __name__=="__main__":
+# SEARCH
+@app.route('/search', methods=['POST'])
+def search():
+    query = request.form['search'].lower()
+    result = []
+
+    for cat in products:
+        for item in products[cat]:
+            if query in item['name'].lower():
+                result.append(item)
+
+    return render_template('products.html',
+                           items=result,
+                           category="Search Results")
+
+# ------------------ INIT DB ------------------
+with app.app_context():
+    db.create_all()
+
+if __name__ == '__main__':
     app.run(debug=True)
